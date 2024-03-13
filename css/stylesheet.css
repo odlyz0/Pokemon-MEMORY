@@ -1,6 +1,6 @@
 body {
    text-align: center;
-    background-color: #000000;
+    background-color: #576fa5;
 }
 
 #board{
@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     background-color:bisque;
-    border: 10px solid lightcoral;
+    border: 10px solid rgb(212, 103, 194);
 }
 
 .pokeball{
