@@ -13,6 +13,9 @@ var board =[];
 var rows = 3;
 var collums = 4;
 
+var pokemon1Selected;
+var pokemon2Selected;
+
 window.onload = function(){
     shuffel();
     startGame();
@@ -47,6 +50,7 @@ for (let c = 0; c <collums; c++){
     card.id = r.toString()+ "-" + c.toString();
     card.src = "img/"+ pokemonImg + ".png";
     card.classList.add("card");
+    card.addEventListener("click", selectedPokemon)
     document.getElementById("board").append(card)
 }
 board.push(row)
@@ -59,7 +63,30 @@ function Closed(){
     for (let r = 0; r< rows; r++){
         for(let c = 0; c< collums; c++){
             let card = document.getElementById(r.toString() + "-"+ c.toString());
-            card.src = "Closed.png"
+            card.src = "img/Closed.png"
+        }
+    }
+}
+
+function selectedPokemon() {
+    if (this.src.includes("Closed")) {
+        if (!pokemon1Selected) {
+            pokemon1Selected = this;
+
+            let coords = pokemon1Selected.id.split("-");
+            let r = parseInt(coords[0]);
+            let c = parseInt(coords[1]);
+            pokemon1Selected.src = "img/" + board[r][c] + ".png";
+        } 
+        
+        
+        else if (!pokemon2Selected && this != pokemon1Selected) {
+            pokemon2Selected = this;
+
+            let coords = pokemon2Selected.id.split("-");
+            let r = parseInt(coords[0]);
+            let c = parseInt(coords[1]);
+            pokemon2Selected.src = "img/" + board[r][c] + ".png";
         }
     }
 }
