@@ -52,4 +52,14 @@ for (let c = 0; c <collums; c++){
 board.push(row)
 }
 console.log(board)
+setTimeout(Closed, 2000)
+}
+
+function Closed(){
+    for (let r = 0; r< rows; r++){
+        for(let c = 0; c< collums; c++){
+            let card = document.getElementById(r.toString() + "-"+ c.toString());
+            card.src = "Closed.png"
+        }
+    }
 }
