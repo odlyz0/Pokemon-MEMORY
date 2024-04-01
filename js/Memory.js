@@ -87,6 +87,19 @@ function selectedPokemon() {
             let r = parseInt(coords[0]);
             let c = parseInt(coords[1]);
             pokemon2Selected.src = "img/" + board[r][c] + ".png";
+            setTimeout(update, 1000);
         }
     }
+}
+
+
+function update() {
+    if (pokemon1Selected.src !== pokemon2Selected.src) {
+        pokemon1Selected.src = "img/Closed.png";
+        pokemon2Selected.src = "img/Closed.png";
+        errors += 1;
+        document.getElementById("errors").innerText = errors;
+    }
+    pokemon1Selected = null;
+    pokemon2Selected = null;
 }
