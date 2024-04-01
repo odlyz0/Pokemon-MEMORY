@@ -1,53 +1,55 @@
-var erros = 0;
-var pokemons= ["balbassaur", 
-"squirtle",
-"charmander",
-"pikachu",
-"eevee",
-"ditto"]
+var errors = 0;
+var pokemon = [
+    "balbasaur",
+    "charmander",
+    "ditto",
+    "pikachu",
+    "squirtle",
+    "eevee"
+]
 
-var pokeballs
+var pokemonSet;
 var board =[];
-rows = 3;
-collums = 5;
+var rows = 3;
+var collums = 4;
 
-wwindow.onload = function(){
-    shuffleCards();
+window.onload = function(){
+    shuffel();
     startGame();
 }
 
-function shuffleCards(){
-    pokeballs = pokeballs.concat(pokeballs); //dubbles each card
-    console.log(pokeballs);
-    //suffles cards
-    for(let i = 0; i < pokeballs.lenght; i++) {
-        let j = Math.floor(Math.random()* pokeballs.lenght); //get random index
-        //swap
-        let temp = pokeballs[i];
-        pokeballs[i]= pokeballs [j];
-        pokeballs[j]= temp;
-    }
+function shuffel(){
+pokemonSet = pokemon.concat(pokemon); //makes two of each pokemon
+console.log(pokemonSet);
+//shuffle 
+for (let i = 0; i < pokemonSet.length; i++){
+    let j = Math.floor(Math.random() * pokemonSet.length); //gets random index
+//swap
+let temp = pokemonSet [i];
+pokemonSet [i]= pokemonSet[j];
+pokemonSet[j]= temp;
 
-    function startGame(){
-        //arrange the board by 3 x 4
+}
+console.log(pokemonSet)
+}
 
-        for (let r = 0 ; r < rows; r++){
-            let row = [];
-            for (let c = 0; c < collums; c++){
-                let pokeballImg = pokeballSet.pop();
-                row.push(pokeballImg);
+function startGame(){
+//board 3x4
+for (let r = 0; r< rows; r++){
+let row = [];
+for (let c = 0; c <collums; c++){
+    let pokemonImg = pokemonSet.pop();
+    row.push(pokemonImg) //Js
 
-              //<Img id = "0-0">
-                let pokeball = document.creativeElement("img")
-                pokeball.id = r.toString()+  "-"+ c.toString();
-                pokeball.src = "img/" +pokeballImg + ".png";
-                pokeball.classList.add("pokeball");
-                document.getElementById("board").append(pokeball);
+     // <img id="0-0" class="card" src="img/eevee.jpg">
 
-            }
-            board.push(row);
-        }
-        
-    }
-    
+    let card = document.createElement("img");
+    card.id = r.toString()+ "-" + c.toString();
+    card.src = "img/"+ pokemonImg + ".png";
+    card.classList.add("card");
+    document.getElementById("board").append(card)
+}
+board.push(row)
+}
+console.log(board)
 }
