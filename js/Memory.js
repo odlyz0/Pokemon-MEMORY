@@ -5,13 +5,14 @@ var pokemon = [
     "ditto",
     "pikachu",
     "squirtle",
-    "eevee"
+    "eevee",
+    "meowth"
 ]
 
 var pokemonSet;
 var board =[];
-var rows = 3;
-var collums = 4;
+var rows = 7;
+var collums = 2;
 
 var pokemon1Selected;
 var pokemon2Selected;
