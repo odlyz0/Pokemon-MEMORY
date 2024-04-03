@@ -1,13 +1,13 @@
 var errors = 0;
 var pokemon = [
     "mew",
-    "mewto",
-    "articuno",
-    "zapdos",
-    "moltres",
-    "ho-oh",
-    "lunala",
-    "salgaleo"
+    "Mewto",
+    "Articuno",
+    "Zapdos",
+    "Moltres",
+    "HO-OH",
+    "Lunala",
+    "Salgaleo"
 
 ]
 
