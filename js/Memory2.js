@@ -1,17 +1,19 @@
 var errors = 0;
 var pokemon = [
-    "balbasaur",
-    "charmander",
-    "ditto",
-    "pikachu",
-    "squirtle",
-    "eevee"
-   
+    "mew",
+    "mewto",
+    "articuno",
+    "zapdos",
+    "moltres",
+    "ho-oh",
+    "lunala",
+    "salgaleo"
+
 ]
 
 var pokemonSet;
 var board =[];
-var rows = 6;
+var rows = 7;
 var collums = 2;
 
 var pokemon1Selected;
@@ -64,13 +66,13 @@ function Closed(){
     for (let r = 0; r< rows; r++){
         for(let c = 0; c< collums; c++){
             let card = document.getElementById(r.toString() + "-"+ c.toString());
-            card.src = "img/Closed.png"
+            card.src = "img/Mclosed.png"
         }
     }
 }
 
 function selectedPokemon() {
-    if (this.src.includes("Closed")) {
+    if (this.src.includes("Mclosed")) {
         if (!pokemon1Selected) {
             pokemon1Selected = this;
 
