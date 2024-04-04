@@ -7,14 +7,14 @@ var pokemon = [
     "Moltres",
     "HO-OH",
     "Lunala",
-    "Salgaleo"
-
+    "Salgaleo",
+    "Giratina"
 ]
 
 var pokemonSet;
 var board =[];
-var rows = 7;
-var collums = 2;
+var rows = 3;
+var collums = 6;
 
 var pokemon1Selected;
 var pokemon2Selected;
@@ -98,8 +98,8 @@ function selectedPokemon() {
 
 function update() {
     if (pokemon1Selected.src !== pokemon2Selected.src) {
-        pokemon1Selected.src = "img/Closed.png";
-        pokemon2Selected.src = "img/Closed.png";
+        pokemon1Selected.src = "img/Mclosed.png";
+        pokemon2Selected.src = "img/Mclosed.png";
         errors += 1;
         document.getElementById("errors").innerText = errors;
     }
