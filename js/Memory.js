@@ -6,11 +6,10 @@ var pokemon = [
     "pikachu",
     "squirtle",
     "eevee"
-   
-]
+];
 
 var pokemonSet;
-var board =[];
+var board = [];
 var rows = 6;
 var collums = 2;
 
@@ -23,48 +22,39 @@ window.onload = function(){
 }
 
 function shuffel(){
-pokemonSet = pokemon.concat(pokemon); //makes two of each pokemon
-console.log(pokemonSet);
-//shuffle 
-for (let i = 0; i < pokemonSet.length; i++){
-    let j = Math.floor(Math.random() * pokemonSet.length); //gets random index
-//swap
-let temp = pokemonSet [i];
-pokemonSet [i]= pokemonSet[j];
-pokemonSet[j]= temp;
-
-}
-console.log(pokemonSet)
+    pokemonSet = pokemon.concat(pokemon);
+    for (let i = 0; i < pokemonSet.length; i++){
+        let j = Math.floor(Math.random() * pokemonSet.length);
+        let temp = pokemonSet[i];
+        pokemonSet[i] = pokemonSet[j];
+        pokemonSet[j] = temp;
+    }
 }
 
 function startGame(){
-//board 3x4
-for (let r = 0; r< rows; r++){
-let row = [];
-for (let c = 0; c <collums; c++){
-    let pokemonImg = pokemonSet.pop();
-    row.push(pokemonImg) //Js
+    for (let r = 0; r < rows; r++){
+        let row = [];
+        for (let c = 0; c < collums; c++){
+            let pokemonImg = pokemonSet.pop();
+            row.push(pokemonImg);
 
-     // <img id="0-0" class="card" src="img/eevee.jpg">
-
-    let card = document.createElement("img");
-    card.id = r.toString()+ "-" + c.toString();
-    card.src = "img/"+ pokemonImg + ".png";
-    card.classList.add("card");
-    card.addEventListener("click", selectedPokemon)
-    document.getElementById("board").append(card)
-}
-board.push(row)
-}
-console.log(board)
-setTimeout(Closed, 2000)
+            let card = document.createElement("img");
+            card.id = r.toString() + "-" + c.toString();
+            card.src = "img/" + pokemonImg + ".png";
+            card.classList.add("card");
+            card.addEventListener("click", selectedPokemon);
+            document.getElementById("board").append(card);
+        }
+        board.push(row);
+    }
+    setTimeout(Closed, 2000);
 }
 
 function Closed(){
-    for (let r = 0; r< rows; r++){
-        for(let c = 0; c< collums; c++){
-            let card = document.getElementById(r.toString() + "-"+ c.toString());
-            card.src = "img/Closed.png"
+    for (let r = 0; r < rows; r++){
+        for (let c = 0; c < collums; c++){
+            let card = document.getElementById(r.toString() + "-" + c.toString());
+            card.src = "img/Closed.png";
         }
     }
 }
@@ -73,26 +63,21 @@ function selectedPokemon() {
     if (this.src.includes("Closed")) {
         if (!pokemon1Selected) {
             pokemon1Selected = this;
-
-            let coords = pokemon1Selected.id.split("-");
-            let r = parseInt(coords[0]);
-            let c = parseInt(coords[1]);
-            pokemon1Selected.src = "img/" + board[r][c] + ".png";
-        } 
-        
-        
-        else if (!pokemon2Selected && this != pokemon1Selected) {
+            revealCard(pokemon1Selected);
+        } else if (!pokemon2Selected && this != pokemon1Selected) {
             pokemon2Selected = this;
-
-            let coords = pokemon2Selected.id.split("-");
-            let r = parseInt(coords[0]);
-            let c = parseInt(coords[1]);
-            pokemon2Selected.src = "img/" + board[r][c] + ".png";
+            revealCard(pokemon2Selected);
             setTimeout(update, 1000);
         }
     }
 }
 
+function revealCard(card) {
+    let coords = card.id.split("-");
+    let r = parseInt(coords[0]);
+    let c = parseInt(coords[1]);
+    card.src = "img/" + board[r][c] + ".png";
+}
 
 function update() {
     if (pokemon1Selected.src !== pokemon2Selected.src) {
@@ -100,7 +85,33 @@ function update() {
         pokemon2Selected.src = "img/Closed.png";
         errors += 1;
         document.getElementById("errors").innerText = errors;
+    } else {
+        if (checkWin()) {
+            handleWin();
+            return;
+        }
     }
     pokemon1Selected = null;
     pokemon2Selected = null;
+}
+
+function checkWin() {
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < collums; c++) {
+            let card = document.getElementById(r.toString() + "-" + c.toString());
+            if (card.src.includes("Closed")) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function handleWin() {
+    let choice = confirm("Congratulations! You found all the Pokémon cards. Do you want to try again?");
+    if (choice) {
+        location.reload();
+    } else {
+        window.location.href = "index.html";
+    }
 }
